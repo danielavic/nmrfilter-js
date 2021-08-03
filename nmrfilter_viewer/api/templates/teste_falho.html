@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<html>
+    <head>
+
+        <script type="text/javascript" language="JavaScript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+        <script>
+
+            $('[id^=\"btnRight\"]').click(function (e) {
+            
+                $(this).prev('select').find('option:selected').clone().appendTo('#isselect_code');
+                
+            });
+            
+            $('[id^=\"btnLeft\"]').click(function (e) {
+            
+                $(this).next('select').find('option:selected').clone().appendTo('#canselect_code');
+            
+            });
+        </script>
+    
+</head>   
+    <style>
+        select {
+    width:400px;
+    height:200px;
+    }
+    .fr {
+    float:right;
+    }
+    .fl {
+    float:left;
+    }
+    </style>
+
+
+    {% if error %}
+    <div class="container">
+        <p class=error><strong>Error:</strong> {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <form action="" method="post" role="form" enctype="multipart/form-data">
+            </form>
+   
+            <div class="form-group">
+                <select id='canselect_code' name='canselect_code' multiple class='fl'>// addition here
+                    {% for opt in options %}
+                        <option value='select'>  {{ opt }} </option> 
+                    {% endfor %}
+                </select>
+            
+
+                <input type='button' id='btnRight_code' value='  >  ' />
+                <br>
+                <input type='button' id='btnLeft_code' value='  <  ' />
+
+            
+                <select id='isselect_code' name='isselect_code' multiple class='fr'>
+                    <option></option>
+
+            
+            <!-- <option value='3'>tata</option> -->
+            <!-- <option value='4'>tutu</option> -->
+                </select>
+            </div>
+    </div>       
+  
+        <!-- <p> 
+            <label for="remove">
+            Remover arquivos selecionados 
+            </label>
+            <select id="remove" name="remove" value="" class="">
+            <option value="nao">Não</option>
+            <option value="sim">Sim</option>
+            </select>
+        </p>
+        <p>
+            <label for="analise">
+             Opções de Solvente 
+            </label>
+            <select id="master-dropdown" name="analise" value="" class="" required>
+              <option value="">-- Selecione uma análise--</option>
+              <option value="methanol">Methanol-D4 (CD3OD)</option>
+              <option value="chloroform">Chloroform-D1 (CDCl3)</option>
+            </select>
+        </p>-->
+
+    <button value="submit" type="submit" class="btn btn-primary">Submit</button>
+    </html>
+{% endblock %}

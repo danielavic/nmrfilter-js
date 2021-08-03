@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
+    <script>
+    	var dataSet = JSON.parse('{{dffinal | safe}}');
+        console.log(dataSet);
+        var i;
+        for (i = 0; i < dataSet.length; i++) {
+            var tmp = dataSet[i][0]
+            var msg = `<a href="/nmrfilter/listfiles?taskid=${tmp}&ty=result" target="_blank">Files</a>`
+            dataSet[i][1] = msg
+            var tmp = dataSet[i][0]
+            var msg = `<a href="/nmrfilter/delete?taskid=${tmp}">Delete</a>`
+            dataSet[i][3] = msg
+            var tmp = dataSet[i][0]
+            var msg = `<a href="/nmrfilter/listfiles?taskid=${tmp}&ty=plots" target="_blank">Files</a>`
+            dataSet[i][2] = msg
+
+        }
+        $(document).ready(function() {
+    	$('#resTable').DataTable( {
+            data : dataSet,
+    	    // add column definitions to map your json to the table
+    	    "columns": [
+    		{title: "ID"},
+    		{title: "Result"},
+    		{title: "Plots"},
+    		{title: "Delete"}
+    	    ]
+    	} );
+        });
+    </script>
+
+    <div class="m-5">
+        <table id="resTable" class="table table-striped" style="width:100%" >
+		<thead>
+	    <tr>
+		<th>ID</th>
+		<th>Result</th>
+		<th>Plots</th>
+		<th>Delete</th>
+	    </tr>
+	    </thead>
+	    </table>
+    </div>
+
+{% endblock %}

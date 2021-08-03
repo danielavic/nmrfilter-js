@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<script src="{{url_for('static', filename='js/jquery.dependent.fields.js')}}"></script>
+
+{% if error %}
+    <div class="container">
+        <p class=error><strong>Error:</strong> {{ error }}
+    </div>
+{% endif %}
+
+<div class="container">
+    <form action="" method="post" role="form" enctype="multipart/form-data"> 
+        <div class="form-group">
+            <label for="category">Arquivos para selecionar para análise</label>
+            <select id="category" name='category' multiple class="form-control"> // addition here
+                {% for opt in options %}
+                    <option>  {{ opt }} </option>
+                {% endfor %}
+            </select>
+        </div>
+
+          <p>
+            <label for="remove">
+             Remover arquivos selecionados 
+            </label>
+            <select id="remove" name="remove" value="" class="">
+              <option value="nao">Não</option>
+              <option value="sim">Sim</option>
+            </select>
+          </p>
+
+          <p>
+
+          <p>
+            <label for="analise">
+             Opções de Solvente 
+            </label>
+            <select id="master-dropdown" name="analise" value="" class="" required>
+              <option value="">-- Selecione uma análise--</option>
+              <option value="methanol">Methanol-D4 (CD3OD)</option>
+              <option value="chloroform">Chloroform-D1 (CDCl3)</option>
+            </select>
+          </p>
+
+        <button type="submit" class="btn btn-primary">Submeter</button>
+    </form>
+</div>
+<script>
+$('#dependent-dropdown1').dependsOn('#master-dropdown', ['univariada']);
+$('#dependent-dropdown2').dependsOn('#master-dropdown', ['multivariada']);
+$('#dependent-dropdown3').dependsOn('#master-dropdown', ['vias']);
+</script>
+
+{% endblock %}
