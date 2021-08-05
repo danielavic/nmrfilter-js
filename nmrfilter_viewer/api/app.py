@@ -59,10 +59,11 @@ def analysis():
     error = None
     if request.method == 'POST':
         form_dict = dict(request.form)
-        data_list = request.form.getlist('category')
+        #data_list = request.form.getlist('category')
+        data_list = request.form.getlist('isselect_code')
         solvente = solventes[form_dict['analise']]
         #print(form_dict)
-        #print(data_list)
+        print(data_list)
         if form_dict['remove']=='sim':
             if len(data_list):
                 for fn in data_list:

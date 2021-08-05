@@ -26,14 +26,13 @@
             <p class=error><strong>Error:</strong> {{ error }}
         </div>
         {% endif %}
-        <div>
-            <form action="" method="post" role="form" enctype="multipart/form-data">
-        </div>
 
-        <div>
+  <div class="container">
+    <form action="" method="post" role="form" enctype="multipart/form-data">
+        <div class="form-group">
             <select id='canselect_code' name='canselect_code' multiple class='fl'>
                 {% for opt in options %}
-                    <option value='select'>  {{ opt }} </option> 
+                    <option>  {{ opt }} </option> 
                 {% endfor %}
             </select>
             <input type='button' id='btnRight_code' value='  >  ' />
@@ -42,7 +41,8 @@
             <select id='isselect_code' name='isselect_code' multiple class='fr'>
             </select>
         </div>
-<!--
+	<br>
+        <div class="form-group">
         <p>
             <label for="remove">
              Remover arquivos selecionados 
@@ -52,7 +52,8 @@
               <option value="sim">Sim</option>
             </select>
         </p>
-
+        </div>
+        <div class="form-group">
             <p>
               <label for="analise">
                Opções de Solvente 
@@ -62,23 +63,24 @@
                 <option value="methanol">Methanol-D4 (CD3OD)</option>
                 <option value="chloroform">Chloroform-D1 (CDCl3)</option>
               </select>
-            </p>-->
+            </p>
+        </div>
   
         <button type="submit" class="btn btn-primary">Submeter</button>
     </form>
-</div>
+  </div>
 
         <script>
             $(document).ready(function(){
                 jQuery('[id^=\"btnRight\"]').click(function (e) {
                     
-                    jQuery(this).prev('select').find('option:selected').clone().appendTo('#isselect_code');
+                    jQuery(this).prev('select').find('option:selected').remove().appendTo('#isselect_code');
                     
                 });
 
                 jQuery('[id^=\"btnLeft\"]').click(function (e) {
 
-                    jQuery(this).next('select').find('option:selected').clone().appendTo('#canselect_code');
+                    jQuery(this).next('select').find('option:selected').remove().appendTo('#canselect_code');
 
                 });
             });
